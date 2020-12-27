@@ -8,10 +8,17 @@ class MessagesController < ApplicationController
   end
 
   def create
-    @message = @room.messages.create!(message_params)
+    @message = @room.messages.new(message_params)
+    @message.assign_attributes(created_by: current_user)
 
     respond_to do |format|
-      format.html { redirect_to @room }
+      if @message.save
+        format.turbo_stream
+        format.html { redirect_to @room }
+      else
+        format.turbo_stream
+        format.html { render :new }
+      end
     end
   end
 

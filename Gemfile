@@ -28,7 +28,15 @@ gem 'webpacker', '~> 6.0.0.pre.2'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
+# Realtime support
 gem 'hotwire-rails'
+
+# Authentication
+gem 'devise'
+
+# Markdown support
+gem 'kramdown'
+gem 'kramdown-parser-gfm'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

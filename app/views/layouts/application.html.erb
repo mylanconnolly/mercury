@@ -6,9 +6,9 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <%= stylesheet_packs_with_chunks_tag 'application' %>
     <%= javascript_packs_with_chunks_tag 'application' %>
-    <link rel="prefetch" href="<%= asset_pack_path 'application.css' %>" />
     <%= yield :head %>
     <%= turbo_include_tags %>
     <%= stimulus_include_tags %>

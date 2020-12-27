@@ -1,18 +1,26 @@
-<p id="notice"><%= notice %></p>
+<div class="container" data-controller="room">
+  <p id="notice"><%= notice %></p>
 
-<%= turbo_stream_from @room %>
+  <%= turbo_stream_from @room %>
 
-<%= turbo_frame_tag 'room' do %>
-  <%= render @room %>
+  <%= turbo_frame_tag 'room' do %>
+    <%= render @room %>
 
-  <p>
-    <%= link_to 'Edit', edit_room_path(@room) %> |
-    <%= link_to 'Back', rooms_path, data: { turbo_frame: '_top' } %>
-  </p>
-<% end %>
+    <p>
+      <%= link_to 'Edit', edit_room_path(@room) %> |
+      <%= link_to 'Back', rooms_path, data: { turbo_frame: '_top' } %>
+    </p>
+  <% end %>
 
-<div id="messages">
-  <%= render @room.messages %>
+  <div class="mt-2 mb-24">
+    <ul id="messages" class="-pb-8 p-4 bg-white border border-gray-300 shadow rounded-md">
+      <%= render @room.messages %>
+    </ul>
+  </div>
 </div>
 
-<%= turbo_frame_tag 'new_message', src: new_room_message_path(@room), target: '_top' %>
+<div class="fixed bottom-0 w-full">
+  <div class="container my-4">
+    <%= turbo_frame_tag 'new_message', src: new_room_message_path(@room), target: '_top' %>
+  </div>
+</div>

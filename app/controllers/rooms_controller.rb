@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class RoomsController < ApplicationController
-  before_action :set_room, only: %i[show edit update destroy]
+  before_action :set_room, only: %i[edit update destroy]
 
   # GET /rooms
   # GET /rooms.json
@@ -11,7 +11,9 @@ class RoomsController < ApplicationController
 
   # GET /rooms/1
   # GET /rooms/1.json
-  def show; end
+  def show
+    @room = Room.includes(messages: :created_by).find(params[:id])
+  end
 
   # GET /rooms/new
   def new
@@ -25,6 +27,7 @@ class RoomsController < ApplicationController
   # POST /rooms.json
   def create
     @room = Room.new(room_params)
+    @room.assign_attributes(created_by: current_user)
 
     respond_to do |format|
       if @room.save
