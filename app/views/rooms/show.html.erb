@@ -1,26 +1,38 @@
-<div class="container" data-controller="room">
-  <p id="notice"><%= notice %></p>
+<div class="flex">
+  <%= render 'rooms/rooms', rooms: @rooms %>
 
-  <%= turbo_stream_from @room %>
+  <div class="flex-grow">
+    <div class="container" data-controller="room">
+      <p id="notice"><%= notice %></p>
 
-  <%= turbo_frame_tag 'room' do %>
-    <%= render @room %>
+      <%= turbo_stream_from @room %>
 
-    <p>
-      <%= link_to 'Edit', edit_room_path(@room) %> |
-      <%= link_to 'Back', rooms_path, data: { turbo_frame: '_top' } %>
-    </p>
-  <% end %>
+      <%= turbo_frame_tag 'room' do %>
+        <div class="flex">
+          <div class="flex-grow">
+            <%= render @room %>
+          </div>
 
-  <div class="mt-2 mb-24">
-    <ul id="messages" class="-pb-8 p-4 bg-white border border-gray-300 shadow rounded-md">
-      <%= render @room.messages %>
-    </ul>
-  </div>
-</div>
+          <div class="p-4 font-medium">
+            <%= link_to 'Edit', edit_room_path(@room) %> |
+            <%= link_to 'Back', rooms_path, data: { turbo_frame: '_top' } %>
+          </div>
+        </div>
+      <% end %>
 
-<div class="fixed bottom-0 w-full">
-  <div class="container my-4">
-    <%= turbo_frame_tag 'new_message', src: new_room_message_path(@room), target: '_top' %>
+      <div class="mt-2 mb-24">
+        <div class="-pb-8 p-4 bg-white border border-gray-300 shadow lg:mx-4 lg:rounded-md">
+          <ul id="messages">
+            <%= render @room.messages %>
+          </ul>
+
+          <%= turbo_frame_tag 'new_message', src: new_room_message_path(@room), target: '_top' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="fixed bottom-0 w-full">
+      <div class="container"></div>
+    </div>
   </div>
 </div>

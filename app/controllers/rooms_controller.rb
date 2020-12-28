@@ -6,13 +6,14 @@ class RoomsController < ApplicationController
   # GET /rooms
   # GET /rooms.json
   def index
-    @rooms = Room.all
+    @rooms = Room.reorder(name: :asc).all
   end
 
   # GET /rooms/1
   # GET /rooms/1.json
   def show
     @room = Room.includes(messages: :created_by).find(params[:id])
+    @rooms = Room.reorder(name: :asc).all
   end
 
   # GET /rooms/new
