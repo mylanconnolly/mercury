@@ -1,8 +1,8 @@
 <div class="flex">
   <%= render 'rooms/rooms', rooms: @rooms %>
 
-  <div class="flex-grow">
-    <div class="container" data-controller="room">
+  <div class="flex-grow block h-screen overflow-auto" data-controller="room">
+    <div class="container">
       <p id="notice"><%= notice %></p>
 
       <%= turbo_stream_from @room %>
